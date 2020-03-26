@@ -1,0 +1,21 @@
+table.tab {
+    font-family: "Times New Roman", Times, serif;
+    border: 1px solid #FFFFFF;
+    width: 65%;
+    height: 200px;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  table.tab td, table.tab th {
+    border: 1px solid #FFFFFF;
+    padding: 3px 2px;
+  }
+  table.tab tbody td {
+    font-size: 13px;
+  }
+  table.tab tr:nth-child(even) {
+    background: #D0E4F5;
+  }
+  table.tab tfoot td {
+    font-size: 14px;
+  }
