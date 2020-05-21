@@ -7,18 +7,28 @@
 <html>
 <head>
     <title>Pharmacy</title>
+
+    <meta charset="utf-8">
+  
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/tableStyle.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/topStyle.css">
     <link rel="stylesheet" href="css/buttonStyle.css">
-    <script src="parse.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <script src="parseTable.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </head>
 
 <body onload="medSearch()">
 
     <div class="topnav">
-        <img src="resources/who.png" id="who">
+        <img src="resources/whoWhite.png" id="who">
         <div id="nav">
             <a href="index.php">Home</a>
             <a href="pharmacy.php" class="active">Pharmacy</a>
@@ -46,16 +56,24 @@
                       
             </div>
         </div>
-        
     </div>
 
-
-    <table id="tab" class="tab"></table>
+    <div class="table-y">
+        <table id="tab" class="table table-striped table-hover"></table>
+    </div>
     <style>
+
+        .table-y{
+            position: relative;
+            height: 40%;
+            overflow: auto;
+            display: block;
+        }
+
         #tab{
-            margin-left: 200px;
-            margin-top: 45px;
-            padding-top: 200px;
+            margin: auto;
+            margin-top: 30px;
+            width: 80%;
         }
     </style>
 
@@ -72,7 +90,8 @@
                 if (this.readyState != 4) return;
                 if (this.status == 200){
                     let data = this.responseText;
-                    parseIntoTable(data);
+
+                    document.getElementById("tab").innerHTML = parseTable(JSON.parse(data)); 
                 }
             };
         }

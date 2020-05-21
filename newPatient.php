@@ -20,7 +20,7 @@
 <body>
 
     <div class="topnav">
-        <img src="resources/who.png" id="who">
+        <img src="resources/whoWhite.png" id="who">
         <div id="nav">
             <a href="index.php" class="active">Home</a>
             <a href="pharmacy.php">Pharmacy</a>

@@ -1,64 +1,38 @@
 
 <?php
-    /*
-    $name = "Admin";
-    $servername = "localhost";
-    $dbname = "test";
-    $conn = new mysqli($servername, "root", "", $dbname);
-    */
-    
-    //print out the database(used for testing)
-    /*
-    if ($conn->connect_error){
-        die("Connection failed: " . $conn->connect_error);
-    }
-    echo "Connected successfully";
-    */
-
-    //$result = $conn->query("SELECT * FROM tablica");
-    //$result = $conn->query("SELECT * FROM employee");
-    //print_r($result);
-    /*
-    while($row = $result->fetch_assoc()) {
-        echo "id: " . $row["id"]. " - username: " . $row["username"]. " " . $row["email"]. "<br>";
-    }
-    */
-    /*
-    while($row = $result->fetch_assoc()) {
-        echo "id: " . $row["employee_id"]. " - name: " . $row["first_name"]. " -surname: " . $row["surname"] . " - address: ". $row["address"] . "<br>";
-    }
-    */
-?> 
-
-<?php
     require 'credentialCheck.php';
     require 'database.php';
 ?>
 
-
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 
     <title>l'hospital</title>
+
+    <meta charset="utf-8">
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/tableStyle.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/topStyle.css">
     <link rel="stylesheet" href="css/buttonStyle.css">
-    <script src="parse.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="parseTable.js"></script>
     <script src="checkAd.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
    
 </head>
 
 <body>
 
-        
 
     <div class="topnav">
        
-        <img src="resources/who.png" id="who" >
+        <img src="resources/whoWhite.png" id="who" >
         <div id="nav">
             <a href="index.php" class="active">Home</a>
             <a href="pharmacy.php">Pharmacy</a>
@@ -69,16 +43,9 @@
         <div id="con"></div>
 
         <style>
-            .topnav a:hover{
-                color: white !important;
-            }
-
-            #ad{
-                margin-left: 60%;
-            }
-            #con{
-                margin-left: 80%;
-            }
+            .topnav a:hover{ color: white !important; }
+            #ad{ margin-left: 60%; }
+            #con{ margin-left: 80%; }
         </style>
 
         <script>
@@ -93,33 +60,38 @@
             <div id="main">
 
                 <input type="text" name="name" class="mainInput"  id="sub" required autocomplete="off" />
-                <label for="nme"><span>Enter doctor name</span></label>
+                <label for="nme"><span>Search Doctors</span></label>
                 <button onclick="process()" id="butt">Submit</button>
                 
                 <input type="text" name="name" class="mainInput"  id="subpat" required autocomplete="off" />
-                <label for="nme"><span>Enter patient name</span></label>
+                <label for="nme"><span>Search Patients</span></label>
                 <button onclick="patientSearch()" id="butt2">Submit</button>
         
             </div>
         </div>
-        
     </div>
 
     
-
-
-    <table id="tab" class="tab"></table>
+    <div class="table-y">
+        <table id="tab" class="table table-striped table-hover"></table>
+    </div>
     <style>
-        #tab{
-            margin-left: 200px;
-            margin-top: 45px;
-            padding-top: 200px;
+        .table-y{
+            position: relative;
+            height: 40%;
+            overflow: auto;
+            display: block;
         }
+
+        #tab{
+            margin: auto;
+            margin-top: 30px;
+            width: 80%;
+        }
+
     </style>
 
-    
 
-   
 
     <!------------------ DATABASE REQUEST FUNCTIONS ---------------------->
 
@@ -137,7 +109,8 @@
                 if (this.status == 200){
                     let data = this.responseText;
                     //console.log(data);
-                    parseIntoTable(data);
+                    
+                    document.getElementById("tab").innerHTML = parseTable(JSON.parse(data)); 
                     
                 }
             };
@@ -165,8 +138,16 @@
                 if (this.readyState != 4) return;
                 if (this.status == 200){
                     let data = this.responseText;
-                    //console.log(data);
-                    parseIntoTable(data);
+                    
+                    console.table(data);
+                    
+                    let returnedDataIntoJSON = JSON.parse(data);
+                    console.table(returnedDataIntoJSON);
+
+                    let html = parseTable(returnedDataIntoJSON);
+
+                    document.getElementById("tab").innerHTML = html;
+                    
                 }
             };
         }

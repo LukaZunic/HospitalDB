@@ -13,17 +13,16 @@ html {
     textarea {
     font-family: 'Ubuntu', sans-serif;
     display: block;
-    margin: 10px !important;
-    padding: 5px !important;
     border: none;
     font-size: 22px;
-    color: azure;
+    
     }
 
     textarea:focus,
     input:focus {
     outline: 0;
     }
+    
     /* mainInput */
 
     input.mainInput,
@@ -72,14 +71,14 @@ html {
     input.mainInput:valid + label > span {
     top: -100px;
     font-size: 22px;
-    color: #333;
+    color: white;
     }
 
     textarea.mainInput:focus + label > span,
     textarea.mainInput:valid + label > span {
     top: -150px;
     font-size: 22px;
-    color: #333;
+    color: white;
     }
 
     input.mainInput:valid + label,
@@ -98,8 +97,8 @@ html {
     margin: 0;
     position: absolute;
     color: white;
-    font-size: 48px;
-    top: -66px;
+    font-size: 50px;
+    top: -70px;
     left: 0px;
     z-index: -1;
     -webkit-transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
@@ -144,3 +143,5 @@ html {
         opacity: 1;
     }
     }
+
+  
