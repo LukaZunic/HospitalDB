@@ -6,3 +6,5 @@ A hospital database program connecting the databases of three separate units ins
     <p>- the blood bank</p>
 
 Created using XAMPP, only for the purpose of presentation.
+
+<img src="resources/screenshot.png">
