@@ -7,4 +7,4 @@ A hospital database program connecting the databases of three separate units ins
 
 Created using XAMPP, only for the purpose of presentation.
 
-<img src="resources/screenshot.png">
+<img src="src/resources/screenshot.png">
